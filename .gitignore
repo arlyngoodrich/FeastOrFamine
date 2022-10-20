@@ -2,6 +2,16 @@ Binaries
 DerivedDataCache
 Intermediate
 Saved
+Documentation
+Content/Megascans
+Content/MetaHumans
+Content/NaturePackage
+Content/PN_GrassLibrary
+Content/UltraDynamicSky
+Plugins/EnvironmentSystem/Content/PN_GrassLibrary
+Plugins/EnvironmentSystem/Content/UltraDynamicSky
+Plugins/EnvironmentSystem/Content/NaturePackage
+Plugins/EnvironmentSystem/Content/AssetPacks
 .vscode
 .vs
 *.VC.db
@@ -12,3 +22,4 @@ Saved
 *.suo
 *.xcodeproj
 *.xcworkspace
+/Build/
