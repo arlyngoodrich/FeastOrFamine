@@ -36,7 +36,7 @@ protected:
 	 * @brief If the player would like to join a game in progress
 	 */
 	UFUNCTION(BlueprintCallable)
-	void JoinGame();
+	void SearchForSessions();
 	
 
 	// ----------- Online SubSystem Code ----------- //

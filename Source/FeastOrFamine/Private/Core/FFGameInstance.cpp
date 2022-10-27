@@ -26,8 +26,17 @@ void UFFGameInstance::StartGame(bool bShouldPlayOnline)
 	
 }
 
-void UFFGameInstance::JoinGame()
+void UFFGameInstance::SearchForSessions()
 {
+
+	UE_LOG(LogFFGameInstance, Log, TEXT("Starting to search for onnline sessions..."))
+	
+	SessionSearch = MakeShareable(new FOnlineSessionSearch());
+	SessionSearch->bIsLanQuery = (IOnlineSubsystem::Get()->GetSubsystemName() == "NULL");
+	SessionSearch->MaxSearchResults = 10000;
+	SessionSearch->QuerySettings.Set("SEARCH_PRESENCE",true,EOnlineComparisonOp::Equals);
+
+	SessionInterface->FindSessions(0,SessionSearch.ToSharedRef());
 }
 
 void UFFGameInstance::Init()
@@ -43,7 +52,12 @@ void UFFGameInstance::Init()
 			SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(this,&UFFGameInstance::OnCreateSessionsComplete);
 			SessionInterface->OnFindSessionsCompleteDelegates.AddUObject(this,&UFFGameInstance::OnFindSessionComplete);
 			SessionInterface->OnJoinSessionCompleteDelegates.AddUObject(this,&UFFGameInstance::OnJoinSessionComplete);
+			UE_LOG(LogFFGameInstance,Warning,TEXT("Online subsystem successful init"))
 		}
+	}
+	else
+	{
+		UE_LOG(LogFFGameInstance,Warning,TEXT("No valid online sub system"))
 	}
 }
 
@@ -51,7 +65,8 @@ void UFFGameInstance::OnCreateSessionsComplete(FName SessionName, bool bSucceede
 {
 	if(bSucceeded)
 	{
-		GetWorld()->ServerTravel('/Game/FeastOrFamine/Maps/RockShoals?listen');
+		UE_LOG(LogFFGameInstance,Warning,TEXT("Created online session starting sever travel to default game map"))
+		GetWorld()->ServerTravel("/Game/FeastOrFamine/Maps/RockShoals?listen");
 	}
 	else
 	{
@@ -61,15 +76,51 @@ void UFFGameInstance::OnCreateSessionsComplete(FName SessionName, bool bSucceede
 
 void UFFGameInstance::OnFindSessionComplete(bool bSucceeded)
 {
+	if(bSucceeded)
+	{
+		const TArray<FOnlineSessionSearchResult> SearchResults = SessionSearch->SearchResults;
+		
+		if(SearchResults.Num())
+		{
+			UE_LOG(LogFFGameInstance,Log,TEXT(" Found %d online sessions"),SearchResults.Num())
+
+			//TEMP NEED TO UPDATE 
+			SessionInterface->JoinSession(0,FName("TestSession"),SearchResults[0]);
+			
+		}
+		else
+		{
+			UE_LOG(LogFFGameInstance,Log,TEXT(" Found 0 online sessions"))
+		}
+	}
+	else
+	{
+		UE_LOG(LogFFGameInstance,Warning,TEXT("Failed to find online sessions"))
+	}
 }
 
 void UFFGameInstance::OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
 {
+	if(APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(),0))
+	{
+		FString JoinAddress = "";
+		SessionInterface->GetResolvedConnectString(SessionName,JoinAddress);
+		if(JoinAddress != "")
+		{
+			UE_LOG(LogFFGameInstance,Log,TEXT("Joining address: %s"),*JoinAddress)
+			PlayerController->ClientTravel(JoinAddress,ETravelType::TRAVEL_Absolute);
+		}
+		else
+		{
+			UE_LOG(LogFFGameInstance,Warning,TEXT("No valid join address"))
+		}
+	}
+	
 }
 
 void UFFGameInstance::CreateServer() const
 {
-	UE_LOG(LogFFGameInstance,Log,TEXT("Creating online session listen server"))
+	UE_LOG(LogFFGameInstance,Log,TEXT("Staring to create online session listen server"))
 
 	FOnlineSessionSettings SessionSettings;
 	SessionSettings.bAllowJoinInProgress = true;
