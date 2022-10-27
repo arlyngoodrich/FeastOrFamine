@@ -52,7 +52,7 @@ void UFFGameInstance::Init()
 			SessionInterface->OnCreateSessionCompleteDelegates.AddUObject(this,&UFFGameInstance::OnCreateSessionsComplete);
 			SessionInterface->OnFindSessionsCompleteDelegates.AddUObject(this,&UFFGameInstance::OnFindSessionComplete);
 			SessionInterface->OnJoinSessionCompleteDelegates.AddUObject(this,&UFFGameInstance::OnJoinSessionComplete);
-			UE_LOG(LogFFGameInstance,Warning,TEXT("Online subsystem successful init"))
+			UE_LOG(LogFFGameInstance,Log,TEXT("Online subsystem successful init"))
 		}
 	}
 	else
@@ -65,7 +65,7 @@ void UFFGameInstance::OnCreateSessionsComplete(FName SessionName, bool bSucceede
 {
 	if(bSucceeded)
 	{
-		UE_LOG(LogFFGameInstance,Warning,TEXT("Created online session starting sever travel to default game map"))
+		UE_LOG(LogFFGameInstance,Log,TEXT("Created online session starting sever travel to default game map"))
 		GetWorld()->ServerTravel("/Game/FeastOrFamine/Maps/RockShoals?listen");
 	}
 	else
@@ -98,6 +98,8 @@ void UFFGameInstance::OnFindSessionComplete(bool bSucceeded)
 		UE_LOG(LogFFGameInstance,Warning,TEXT("Failed to find online sessions"))
 	}
 }
+
+
 
 void UFFGameInstance::OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
 {
