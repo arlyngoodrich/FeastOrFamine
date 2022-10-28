@@ -10,9 +10,7 @@ Content/NaturePackage
 Content/PN_GrassLibrary
 Content/UltraDynamicSky
 Content/beffio
-Plugins/EnvironmentSystem/Content/PN_GrassLibrary
-Plugins/EnvironmentSystem/Content/UltraDynamicSky
-Plugins/EnvironmentSystem/Content/NaturePackage
+Plugins/Developer
 Plugins/EnvironmentSystem/Content/AssetPacks
 .vscode
 .vs
