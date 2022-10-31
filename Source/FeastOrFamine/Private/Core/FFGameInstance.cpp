@@ -5,10 +5,14 @@
 #include "FeastOrFamine/FeastOrFamine.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
+#include "CoreGlobals.h"
+
 
 UFFGameInstance::UFFGameInstance()
 {
 }
+
+// ----------- Main Menu UI Commands ----------- //
 
 void UFFGameInstance::StartGame(bool bShouldPlayOnline)
 {
@@ -38,6 +42,33 @@ void UFFGameInstance::SearchForSessions()
 
 	SessionInterface->FindSessions(0,SessionSearch.ToSharedRef());
 }
+
+// ----------- Instance  Info ----------- //
+
+FString UFFGameInstance::GetProjectVersion()
+{
+
+	FString ProjectVersion;
+	
+	if(GConfig)
+	{
+		GConfig->GetString(
+			TEXT("/Script/EngineSettings.GeneralProjectSettings"),
+			TEXT("ProjectVersion"),
+			ProjectVersion,
+			GGameIni
+			);
+	}
+	else
+	{
+		UE_LOG(LogFFGameInstance,Warning,TEXT("Game instance could not get GConfig"))
+	}
+
+	return ProjectVersion;
+}
+
+
+// ----------- Online SubSystem Code ----------- //
 
 void UFFGameInstance::Init()
 {

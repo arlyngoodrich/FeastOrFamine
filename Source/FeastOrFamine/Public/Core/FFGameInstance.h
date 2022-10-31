@@ -37,6 +37,15 @@ protected:
 	 */
 	UFUNCTION(BlueprintCallable)
 	void SearchForSessions();
+
+	// ----------- Instance  Info ----------- //
+
+	/**
+	 * @brief Gets Project Version from Project Settings
+	 * @return FString of Project Version
+	 */
+	UFUNCTION(BlueprintPure,Category="Game Instance Info")
+	static FString GetProjectVersion();
 	
 
 	// ----------- Online SubSystem Code ----------- //
