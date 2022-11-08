@@ -81,6 +81,7 @@ void AItemBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty >& OutLifeti
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(AItemBase, ItemData);
+	DOREPLIFETIME(AItemBase, PhysicsTimeDuration);
 }
 
 void AItemBase::OnPlayerInteraction_Implementation(AActor* InstigatingActor)

@@ -8,7 +8,7 @@
 
 UBuildingPieceSnapPoint::UBuildingPieceSnapPoint()
 {
-	SetIsReplicated(true);
+	SetIsReplicatedByDefault(true);
 	SphereRadius = 5;
 }
 
