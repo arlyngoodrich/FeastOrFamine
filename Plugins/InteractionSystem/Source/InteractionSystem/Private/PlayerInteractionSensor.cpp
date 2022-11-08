@@ -214,7 +214,7 @@ bool UPlayerInteractionSensor::SetLookLocationLoop(AActor*& HitActor)
 	OwningController->GetPlayerViewPoint(StartLocation, ViewRotation);
 	EndLocation = StartLocation + (ViewRotation.Vector() * InteractionDistance);
 
-	TraceResult = GetWorld()->LineTraceSingleByChannel(Hit, StartLocation, EndLocation, ECC_Visibility, TraceParams);
+	TraceResult = GetWorld()->LineTraceSingleByChannel(Hit, StartLocation, EndLocation, ECC_Camera, TraceParams);
 	LookHitResult = Hit;
 
 	if (bDrawDebug)
