@@ -87,7 +87,7 @@ void ACustomFoliageManager::GetCustomFoliageISMCs()
 		}
 	}
 
-	UE_LOG(LogEnvironmentSystem,Warning,TEXT("%s found %d custom foliage ISMCs"),
+	UE_LOG(LogEnvironmentSystem,Log,TEXT("%s found %d custom foliage ISMCs"),
 		*GetName(),CustomFoliageISMCs.Num())
 	
 }

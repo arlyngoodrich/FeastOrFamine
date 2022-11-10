@@ -14,6 +14,11 @@ ACustomFoliageBase::ACustomFoliageBase()
 	PrimaryActorTick.bCanEverTick = true;
 	bReplicates = true;
 
+	// Adds Static mesh component to actor
+	FoliageMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Foliage Mesh"));
+	FoliageMesh->SetIsReplicated(true);
+	SetRootComponent(FoliageMesh);
+
 }
 
 void ACustomFoliageBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty >& OutLifetimeProps) const
@@ -50,6 +55,29 @@ void ACustomFoliageBase::OnSpawned(UCustomFoliageISMC* SetOriginatingFoliageISMC
 
 		return;
 	}
+
+	//If true to use Debug
+	if(bUseDebugMesh == true && DebugMesh != nullptr)
+	{
+		//Set to debug mesh
+		FoliageMesh->SetStaticMesh(DebugMesh);
+	}
+	else
+	{
+		//If not using debug mesh, try to use Foliage ISMC mesh
+		if(SetOriginatingFoliageISMC->GetStaticMesh())
+
+		{
+			FoliageMesh->SetStaticMesh(SetOriginatingFoliageISMC->GetStaticMesh());
+		}
+		else
+		{
+			UE_LOG(LogEnvironmentSystem,Warning,TEXT("%s Foliage ISMC Mesh is null"),
+				*GetName())
+		}
+	}
+	
+
 	
 	OriginatingFoliageISMC = SetOriginatingFoliageISMC;
 	FoliageManager = SetFoliageManager;

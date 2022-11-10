@@ -42,6 +42,15 @@ public:
 
 protected:
 
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* FoliageMesh;
+
+	UPROPERTY(EditDefaultsOnly, Category="Foliage")
+	bool bUseDebugMesh;
+
+	UPROPERTY(EditDefaultsOnly,Category="Foliage")
+	UStaticMesh* DebugMesh;
+	
 	/**
 	 * @brief Foliage ISMC to return instance to. OnRep used to remove instance when actor spawned in for client
 	 */
