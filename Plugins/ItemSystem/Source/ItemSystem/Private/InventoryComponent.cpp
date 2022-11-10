@@ -330,6 +330,9 @@ bool UInventoryComponent::TransferItemToPosition(UInventoryComponent* TargetInve
 bool UInventoryComponent::AutoAddItem(const FItemData InItem, FItemData& OutRemainingItem)
 {
 
+	//Make sure out item is the same is in item so we're not changing the original item if nothing happens
+	OutRemainingItem = InItem;
+	
 	if(GetOwnerRole() != ROLE_Authority)
 	{
 		return false;
