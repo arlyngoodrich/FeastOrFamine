@@ -37,11 +37,16 @@ void UCraftingWidget::InitializeCraftingWidget()
 			*GetOwningPlayer()->GetName())
 		return;
 	}
+
 	
 	RefreshRecipeWidgetReferences();
 	BP_UpdateRecipeGrid();
 
-	MyCraftingComponent->OnCraftingStarted.AddDynamic(this,&UCraftingWidget::OnNewRecipeCraftStart);
+	if(bHasBeenInit == false)
+	{
+		MyCraftingComponent->OnCraftingStarted.AddDynamic(this,&UCraftingWidget::OnNewRecipeCraftStart);
+		bHasBeenInit = true;
+	}
 }
 
 void UCraftingWidget::SetReferences(UCraftingComponent* SetMyCraftingComponent, APlayerController* OwningPlayer)

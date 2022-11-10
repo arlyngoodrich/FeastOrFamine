@@ -88,6 +88,11 @@ public:
 protected:
 
 	/**
+	 * @brief False until InitializeCraftingWidget called, then true
+	 */
+	bool bHasBeenInit = false;
+
+	/**
 	 * @brief Pointers to Widget recipes created during Initialize Recipes method
 	 */
 	UPROPERTY(BlueprintReadOnly,Category="Crafting")
