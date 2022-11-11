@@ -197,12 +197,10 @@ void ACustomFoliageManager::SpawnFoliageActor(const FTransform Transform, UCusto
 
 	if(ACustomFoliageBase* NewFoliage = GetWorld()->SpawnActor<ACustomFoliageBase>(FoliageISMC->GetCustomFoliageBase(),Transform))
 	{
+		
 		TrackedFoliage.Add(NewFoliage);
 		NewFoliage->OnSpawned(FoliageISMC,this);
 	}
-	else
-	{
-		UE_LOG(LogEnvironmentSystem,Log,TEXT("Unable to spawn foliage actor"))
-	}
+	
 }
 

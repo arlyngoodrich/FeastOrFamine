@@ -12,13 +12,21 @@ TSubclassOf<ACustomFoliageBase> UFFCustomFoliageISMC::GetCustomFoliageBase()
 
 	if(GetActorClassFromMeshMap(ClassToSpawn))
 	{
+
+		if(ClassToSpawn == nullptr)
+		{
+			UE_LOG(LogFFEnvironmentSystem,Log,TEXT("Class To Spawn is Nullptr"))
+			return DefaultFoliageActorClass;
+		}
+
+		//UE_LOG(LogFFEnvironmentSystem,Log,TEXT("Returned class %s from map"),*ClassToSpawn->GetName())
 		return ClassToSpawn;
 	}
 	else
 	{
 
-		UE_LOG(LogFFEnvironmentSystem,Log,TEXT("%s could not match mesh with actor map reverting to spawn default actor"),
-	*GetName())
+		UE_LOG(LogFFEnvironmentSystem,Log,TEXT("%s could not %s mesh with actor map reverting to spawn default actor"),
+	*GetName(),*GetStaticMesh()->GetName())
 		
 		return DefaultFoliageActorClass;
 	}
@@ -33,7 +41,7 @@ bool UFFCustomFoliageISMC::GetActorClassFromMeshMap(TSubclassOf<ACustomFoliageBa
 	{
 		if(FoliageActorMeshMaps[i].FISMCStaticMesh == GetStaticMesh())
 		{
-			FoliageActorMeshMaps[i].FoliageActorToSpawn = OutFoliageClass;
+			OutFoliageClass = FoliageActorMeshMaps[i].FoliageActorToSpawn;
 			return true;
 		}
 	}
