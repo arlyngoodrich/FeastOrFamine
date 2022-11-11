@@ -4,6 +4,10 @@
 #include "CustomFoliageISMC.h"
 
 
+TSubclassOf<ACustomFoliageBase> UCustomFoliageISMC::GetCustomFoliageBase()
+{
+	return DefaultFoliageActorClass;
+}
 
 void UCustomFoliageISMC::GetInstancesInRange(const FVector Center, const float Range, TArray<int32>& Instances) const
 {

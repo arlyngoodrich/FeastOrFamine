@@ -6,3 +6,4 @@
 IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, FeastOrFamine, "FeastOrFamine" );
 
 DEFINE_LOG_CATEGORY(LogFFGameInstance)
+DEFINE_LOG_CATEGORY(LogFFEnvironmentSystem)

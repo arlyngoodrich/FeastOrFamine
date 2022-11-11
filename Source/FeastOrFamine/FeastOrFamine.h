@@ -5,3 +5,4 @@
 #include "CoreMinimal.h"
 
 DECLARE_LOG_CATEGORY_EXTERN(LogFFGameInstance, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(LogFFEnvironmentSystem, Log, All);

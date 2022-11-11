@@ -17,9 +17,9 @@ class ENVIRONMENTSYSTEM_API UCustomFoliageISMC : public UFoliageInstancedStaticM
 	GENERATED_BODY()
 
 public:
-	
-	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Foliage System")
-	TSubclassOf<ACustomFoliageBase> FoliageActorClass;
+
+	virtual TSubclassOf<ACustomFoliageBase> GetCustomFoliageBase();
+
 	
 	/**
 	 * @brief Gets all instances in range
@@ -60,6 +60,12 @@ public:
 
 protected:
 
+	/**
+	 * @brief Default foliage actor this ISMC should use
+	 */
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Foliage System")
+	TSubclassOf<ACustomFoliageBase> DefaultFoliageActorClass;
+	
 	FTimerHandle SafeRemoveTimerHandle;
 
 	TArray<int32> InstancesPendingRemove;
