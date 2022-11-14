@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "CustomFoliageBase.h"
 #include "ItemData.h"
+#include "ItemSystem/Public/ItemBase.h"
 #include "EnvironmentData.Generated.h"
 
 class ACustomFoliageBase;
@@ -21,7 +22,7 @@ struct FHarvestReward
 	 * @brief Item to give 
 	 */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Harvesting")
-	FItemData HarvestRewardItem;
+	TSubclassOf<AItemBase> HarvestRewardClass;
 
 	/**
 	 * @brief Default amount of item to give
@@ -40,19 +41,19 @@ struct FHarvestReward
 	 */
 	FHarvestReward()
 	{
-		HarvestRewardItem = FItemData();
+		HarvestRewardClass = nullptr;
 		RewardAmount = 0;
 		bIsValid = false;
 	}
 
 	/**
 	 * @brief Default constructor that will be valid
-	 * @param SetHarvestRewardItem Item that will be rewarded
+	 * @param SetHarvestRewardClass Item that will be rewarded
 	 * @param SetRewardAmount Default of amount of item that will be given
 	 */
-	FHarvestReward(const FItemData SetHarvestRewardItem, const int32 SetRewardAmount)
+	FHarvestReward(const TSubclassOf<AItemBase> SetHarvestRewardClass, const int32 SetRewardAmount)
 	{
-		HarvestRewardItem = SetHarvestRewardItem;
+		HarvestRewardClass = SetHarvestRewardClass;
 		RewardAmount = SetRewardAmount;
 		bIsValid = true;
 	}
@@ -66,7 +67,7 @@ struct FHarvestReward
 	{
 		FString Reward;
 
-		Reward += HarvestRewardItem.DisplayName.ToString();
+		Reward += HarvestRewardClass->GetName();
 		Reward.Append(" : ");
 		Reward.AppendInt(RewardAmount);
 
@@ -84,7 +85,7 @@ struct FHarvestReward
 	{
 		return
 			(
-				HarvestReward.HarvestRewardItem == HarvestRewardItem &&
+				HarvestReward.HarvestRewardClass == HarvestRewardClass &&
 				HarvestReward.RewardAmount == RewardAmount &&
 				HarvestReward.bIsValid &&
 				bIsValid

@@ -6,7 +6,8 @@
 #include "Environment/FFCustomFoliageBase.h"
 #include "FFCustomFoliageInteract.generated.h"
 
-
+class UInteractableObjectComponent;
+class ACharacter;
 
 
 /**
@@ -16,5 +17,11 @@ UCLASS()
 class FEASTORFAMINE_API AFFCustomFoliageInteract : public AFFCustomFoliageBase
 {
 	GENERATED_BODY()
+
+public:
+
+	AFFCustomFoliageInteract();
+
+
 	
 };

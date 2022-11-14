@@ -2,4 +2,11 @@
 
 
 #include "Environment/FFCustomFoliageInteract.h"
+#include "InteractableObjectComponent.h"
+
+AFFCustomFoliageInteract::AFFCustomFoliageInteract()
+{
+	
+}
+
 
