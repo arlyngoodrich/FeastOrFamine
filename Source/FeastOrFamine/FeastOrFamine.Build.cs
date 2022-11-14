@@ -8,7 +8,19 @@ public class FeastOrFamine : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Foliage" ,"EnvironmentSystem", "ItemSystem"});
+		PublicDependencyModuleNames.AddRange(new string[] 
+			{ 
+				"Core", 
+				"CoreUObject", 
+				"Engine", 
+				"InputCore", 
+				"Foliage",
+				"EnvironmentSystem",
+				"UniversalCoreAssets",
+				"CharacterLocomotion", 
+				"ItemSystem"
+			}
+		);
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "OnlineSubsystem","OnlineServicesNull","OnlineSubsystemSteam" });
 
