@@ -32,4 +32,5 @@ public:
 	UFUNCTION(BlueprintNativeEvent,BlueprintCallable, Category="Harvest System")
 	void GiveHarvestReward(FItemData HarvestRewardItem);
 	
+	
 };

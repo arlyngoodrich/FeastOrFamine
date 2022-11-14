@@ -3,3 +3,7 @@
 
 #include "Core/FFCustomCharacter.h"
 
+void AFFCustomCharacter::GiveHarvestReward_Implementation(FItemData HarvestRewardItem)
+{
+	IFFHarvestInterface::GiveHarvestReward_Implementation(HarvestRewardItem);
+}
